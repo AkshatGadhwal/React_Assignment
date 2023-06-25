@@ -25,7 +25,7 @@ function UserList() {
         }
     });
   }
-
+  
   const { data, error, isLoading, isFetching, isSuccess } = useFetchUsersQuery({ page: pageNumber, per_page: numUsers }); 
   
   return (
@@ -39,8 +39,8 @@ function UserList() {
 
                 <h1> React Assignment</h1>
                 <div className="card">
-                    <div style={{ display: 'flex' }}>
-                        <div>
+                    <div className='parent'>
+                        <div className='children'>
                             <p>Users Per Page</p>
                             <select value={numUsers} onChange={(e) =>
                                 {
@@ -54,16 +54,16 @@ function UserList() {
                                 <option value={20}>20</option>
                             </select>
                         </div>
-                        <div>
+                        <div className='children'>
                             <p>Page Number</p>
                             <select value={pageNumber} onChange={(e) => setPageNumber(Number(e.target.value))}>
                             {f((data?.total_pages)?(data?.total_pages):1)}
                             </select>
                         </div>
                     </div>
-                    <div style={{ display: 'flex' }}>
-                        <p>Total Users: {data?.total}</p>
-                        <p>Total Pages: {data?.total_pages}</p>
+                    <div className='parent'>
+                        <p className='children'>Total Users: {data?.total}</p>
+                        <p className='children'>Total Pages: {data?.total_pages}</p>
                     </div>
                     <div>
                     <p>Number of users fetched: {data?.data.length}</p>

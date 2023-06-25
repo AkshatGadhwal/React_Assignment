@@ -73,4 +73,14 @@
     object-fit: cover;
     border-radius: 50%;
   }
+
+  .parent{
+    display: flex;
+    justify-content: center;
+  }
+
+  .children{
+    margin-left:auto;
+    margin-right: auto;
+  }
   
