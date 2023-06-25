@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const API_URL = "https://reqres.in/api/users?page=1&per_page=5";
+const API_URL = "https://reqres.in/api/";
 
 export interface UserResponse {
     page: number;
