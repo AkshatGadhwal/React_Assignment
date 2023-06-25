@@ -36,3 +36,13 @@ npm run dev
 ![List View](./public/ListView.png)
 
 ![User Details](./public/DetailsView.png)
+
+## Directory Structure
+
+- `src`: Contains the main source code of the React application.
+  - `components`: Contains components for Users-List page and User-Details page.
+  - `features/users/api-key-slice.ts`: RTK Query setup.
+  - `store`: Contains the Redux store configuration
+  - `App.tsx`: The main entry point of the application.
+
+```
