@@ -1,3 +1,4 @@
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const API_URL = "https://reqres.in/api/";
@@ -37,6 +38,10 @@ export interface UserResponse {
       };
     },
   });
+
+  // export const selectUserById = createSelector(
+  //   [,()], (users,userId) => users.filter((user: User) => user.id == userId)
+  // )
   
   export const { useFetchUsersQuery } = apiSlice;
   

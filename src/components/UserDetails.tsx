@@ -1,67 +1,46 @@
-import reactLogo from './assets/react.svg'
-import { useAppDispatch } from '../app/hooks';
-import { useState } from 'react';
-import { useFetchUsersQuery } from '../features/users/users-api-slice';
+import { User, useFetchUsersQuery } from '../features/users/users-api-slice';
+import { createSelector } from '@reduxjs/toolkit';
+import { useLocation, useParams } from 'react-router-dom';
 
 function UserDetails(){
+
+    const location = useLocation();
+    const page = location.state.page ? location.state.page : 1;
+    const per_page = location.state.per_page ? location.state.per_page : 20;
+
+    const { id } = useParams();
+
+    let {data} = useFetchUsersQuery({page:page,per_page:per_page}); // geting from the catch, not calling again
+
+    const dummyUser: User = {
+        id: 0,
+        first_name:"not found",
+        last_name:"not found",
+        email:"not found",
+        avatar:"not found"
+    }
+    const dummyUserArray = [dummyUser]
+    const res = data? data.data : dummyUserArray;
+
+    const selectNumCompletedTodos = createSelector(
+        (data: User[]) => data,
+        (data:User[],userId : number) => userId,
+        (data:User[],userId:number) => data.filter((user) => user.id == userId)
+      )
+      
+    const user = selectNumCompletedTodos(res,id?Number(id):0)[0];
+
     return(
         <div>
-            <h1>User Details </h1>
+            <h2>User Details</h2>
+            <p><img src={user.avatar} alt={`Avatar of ${user.first_name}`} /></p>
+            <p>ID: {user.id}</p>
+            <p>Email: {user.email}</p>
+            <p>First Name: {user.first_name}</p>
+            <p>Last Name: {user.last_name}</p>
         </div>
     );
 }
 export default UserDetails;
 
-// function UserList() {
-//   const [numUsers, setNumUsers] = useState(10); // Change the state variable name
 
-//   const { data, isFetching } = useFetchUsersQuery({ page: 1, per_page: numUsers }); // Update the hook usage
-
-//   return (
-//     <div className="App">
-
-//       <h1> React Assignment</h1>
-//       <div className="card">
-//         <div>
-//           <p>Users to Fetch</p>
-//           <select value={numUsers} onChange={(e) => setNumUsers(Number(e.target.value))}>
-//             <option value={5}>5</option>
-//             <option value={10}>10</option>
-//             <option value={15}>15</option>
-//             <option value={20}>20</option>
-//           </select>
-//         </div>
-//         <div>
-//           <p>Number of users fetched: {data?.data.length}</p>
-//           <table className="table">
-//   <thead>
-//     <tr>
-//       <th>ID</th>
-//       <th>Email</th>
-//       <th>First Name</th>
-//       <th>Last Name</th>
-//       <th>Avatar</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     {data?.data.map((user) => (
-//       <tr key={user.id}>
-//         <td>{user.id}</td>
-//         <td>{user.email}</td>
-//         <td>{user.first_name}</td>
-//         <td>{user.last_name}</td>
-//         <td>
-//           <img src={user.avatar} alt={`Avatar of ${user.first_name}`} />
-//         </td>
-//       </tr>
-//     ))}
-//   </tbody>
-// </table>
-
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default UserList;
