@@ -1,8 +1,4 @@
-import reactLogo from './assets/react.svg'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { useAppDispatch } from './app/hooks';
-import { useState } from 'react';
-import { useFetchUsersQuery } from './features/users/users-api-slice';
 
 import UserDetails from './components/UserDetails';
 import UserList from './components/UserList';
