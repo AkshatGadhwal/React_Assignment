@@ -1,5 +1,3 @@
-Certainly! Here's an example of a README file for your React assignment:
-
 ```
 # React Assignment
 
